@@ -1,0 +1,64 @@
+{
+  "manifest_version": 3,
+  "name": "RTL Smart Companion",
+  "version": "4.3",
+  "description": "تشخیص خودکار متن فارسی/عربی، راست‌چین کردن، حفظ فرمول‌های ریاضی و کد، اعمال فونت فارسی Estedad برای ChatGPT (و chat.parspremium.net)، Claude، DeepSeek و Gemini",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "*://*.chatgpt.com/*",
+    "*://chat.parspremium.net/*",
+    "*://*.claude.ai/*",
+    "*://*.chat.deepseek.com/*",
+    "*://*.gemini.google.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*.chatgpt.com/*", "*://chat.parspremium.net/*"],
+      "js": ["sites/chatgpt.js", "common.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://*.claude.ai/*"],
+      "js": ["sites/claude.js", "common.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://*.chat.deepseek.com/*"],
+      "js": ["sites/deepseek.js", "common.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["*://*.gemini.google.com/*"],
+      "js": ["sites/gemini.js", "common.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "RTL Smart Companion",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["fonts/Estedad-Regular.woff2", "fonts/Estedad-Bold.woff2"],
+      "matches": [
+        "*://*.chatgpt.com/*",
+        "*://chat.parspremium.net/*",
+        "*://*.claude.ai/*",
+        "*://*.chat.deepseek.com/*",
+        "*://*.gemini.google.com/*"
+      ]
+    }
+  ]
+}
